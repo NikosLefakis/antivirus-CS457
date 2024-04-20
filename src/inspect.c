@@ -131,7 +131,7 @@ void scan_file(char *path) {
     regex_t regex;
     int reti;
     char line[MAX_LINE_LEN];
-    char* pattern = "(http://|https://|www\\.)([a-zA-Z0-9-]+\\.?)+[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro)|[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro)";
+    char* pattern = "(http://|https://|www\\.)([a-zA-Z0-9-]+\\.?)+[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro|gr)|[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro|gr)";
 
 
 

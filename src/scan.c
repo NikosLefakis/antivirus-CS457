@@ -170,7 +170,7 @@ void print_results(char* dir) {
 
     time(&rawtime);
     timeinfo = localtime(&rawtime);
-    strftime(timestamp, 20, "%d-%b-%y %H:%M:%S", timeinfo); // Format the timestamp
+    strftime(timestamp, 20, "%d-%b-%y %H:%M:%S", timeinfo); 
 
     printf("[INFO] [%d] [%s] Application Started\n", pid , timestamp);
     sleep(1);

@@ -22,6 +22,7 @@
 #define MAX_LINE_LEN 2048
 #define MAX_DOMAINS 4096
 #define MAX_FILES 4096
+#define MAX_MEMBERS 10
 
 #define MAX_EVENTS 10
 #define EVENT_SIZE (sizeof(struct inotify_event))
@@ -32,6 +33,9 @@ typedef struct{
     char* path;
     char* message;
 }InfectedFiles;
+
+int shares[MAX_MEMBERS][2];
+int computed_number[2];
 
 
 /*-------------- For Scan -----------------------------------------------------------*/
@@ -89,3 +93,27 @@ void monitor_handle_events(int fd);
 /*Function to print result in monitor mode */
 void print_results_monitor(char* dir);
 
+/*-------------- For Slice - Unlock -----------------------------------------------------------*/
+
+/* Function to take process id */
+pid_t pid_process();
+
+/* Function to generate a random number with custom range */ 
+int generate_random_number(int min, int max);
+
+/* Function to evaluate the polynomial at a given point */
+int evaluate_polynomial(int a2, int a1, int a0, int x);
+
+/* Function to generate shares for a given secret */
+void generate_shares(int secret, int shares[MAX_MEMBERS][2]);
+
+/* Function to reconstruct the secret number from provided shares*/
+int reconstruct_secret(int shares[MAX_MEMBERS][2], int provided_shares[MAX_MEMBERS][2], int num_provided_shares);
+
+/* Function to print the slice (pairs of shares) */
+void print_slice(int secret_number);
+
+/* Function to print messages in unlock mode */
+void print_unlock_provided_share(int reconstructed_number , int provided_share_number);
+
+/*----------------------------------------------------------------------------------------------------------------------------------*/

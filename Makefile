@@ -1,5 +1,5 @@
-antivirus:  antivirus.c src/scan.c src/inspect.c src/monitor.c include/antivirus.h
-	gcc -o antivirus antivirus.c src/scan.c src/inspect.c src/monitor.c -lcrypto -lcurl
+antivirus:  antivirus.c src/scan.c src/inspect.c src/monitor.c src/slice-unlock.c include/antivirus.h
+	gcc -o antivirus antivirus.c src/scan.c src/inspect.c src/monitor.c src/slice-unlock.c -lcrypto -lcurl
 
 all: antivirus
 
