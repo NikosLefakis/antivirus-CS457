@@ -1,3 +1,12 @@
+
+/*****************************************************
+ * @file   antivirus.h                                  *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for antivirus.h (Function's declaration) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <dirent.h>
@@ -10,7 +19,6 @@
 #include <regex.h>
 #include <sys/stat.h>
 #include <time.h>
-#include <libgen.h>
 #include <errno.h>
 #include <sys/inotify.h>
 #include <poll.h>
@@ -38,7 +46,7 @@ int shares[MAX_MEMBERS][2];
 int computed_number[2];
 
 
-/*-------------- For Scan -----------------------------------------------------------*/
+/*-------------- For Scan Mode -----------------------------------------------------------*/
 
 /*Function to calculate the MD5 hash of a file */
 void calculate_md5(char *filename, char *md5sum);
@@ -55,7 +63,7 @@ void scan_directories(char* dirname);
 /* Function to print results in scan mode */
 void print_results(char* dir);
 
-/*-------------- For Inspect -----------------------------------------------------------*/
+/*-------------- For Inspect Mode -----------------------------------------------------------*/
 
 typedef struct {
     char filename[MAX_PATH];
@@ -85,7 +93,7 @@ void scan_file(char *path);
 void traverse_directory_inspect(char *dir);
 
 
-/*-------------- For Monitor -----------------------------------------------------------*/
+/*-------------- For Monitor Mode -----------------------------------------------------------*/
 
 /*Function that handle events with help of inotify library */
 void monitor_handle_events(int fd);
@@ -93,7 +101,7 @@ void monitor_handle_events(int fd);
 /*Function to print result in monitor mode */
 void print_results_monitor(char* dir);
 
-/*-------------- For Slice - Unlock -----------------------------------------------------------*/
+/*-------------- For Slice - Unlock Mode-----------------------------------------------------------*/
 
 /* Function to take process id */
 pid_t pid_process();

@@ -1,3 +1,12 @@
+
+/*****************************************************
+ * @file   antivirus.c                                 *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for antivirus.c (main with commands from CLI) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
 #include "include/antivirus.h"
 
 int main(int argc , char* argv[]){
@@ -14,11 +23,7 @@ int main(int argc , char* argv[]){
     
      int secret_number = atoi(argv[2]); /* for slice command*/
      // Check if the provided number is positive
-     if (secret_number <= 0) {
-        printf("\033[0;31mInvalid number. Please provide a positive integer.\033[0m\n");
-        exit(EXIT_FAILURE);
-     }
-
+     
     generate_shares(secret_number, shares);
 
     if(!strcmp(argv[1],"scan")){
@@ -71,8 +76,7 @@ int main(int argc , char* argv[]){
         print_unlock_provided_share(reconstructed_secret , num_provided_shares);
 
 }
-    
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 

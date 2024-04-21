@@ -1,0 +1,4 @@
+google.com
+example.org
+uoc.gr
+www.phishing.testcategory.com

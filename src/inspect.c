@@ -1,3 +1,13 @@
+
+/*****************************************************
+ * @file   inspect.c                               *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for inspect.c (Inspect mode) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
+
 #include "../include/antivirus.h"
 
 
@@ -6,8 +16,8 @@ int domain_counter = 0;
 int file_count_inspect = 0;
 
 
-/*---------------------Inspect mode------------------------------------------------------------------------*/
 
+/*for message of request*/
 size_t curl_callback(void *contents, size_t size, size_t nmemb, void *userp) {
     size_t realsize = size * nmemb;
     char *response = (char *)userp;
@@ -15,6 +25,8 @@ size_t curl_callback(void *contents, size_t size, size_t nmemb, void *userp) {
     return realsize;
 }
 
+
+/* Check for domain if malicious or not with help of Cloudflare (HTTP request)*/
 int check_domain(char *domain) {
     CURL *curl;
     CURLcode res;
@@ -49,6 +61,7 @@ int check_domain(char *domain) {
     return 0;  /* return 0 gia safe domain*/
 }
 
+/* Check for duplicates to not include in array*/
 int check_duplicates(char *dom) {
     for (int i = 0; i < domain_counter; i++) {
         if (strcmp(dom, domains[i].domain) == 0) {
@@ -58,6 +71,7 @@ int check_duplicates(char *dom) {
     return 0;
 }
 
+/* Remove prefix*/
 char* removePrefix(char *domain) {
     if (strstr(domain, "https://") == domain) {
         memmove(domain, domain + 8, strlen(domain) - 7);
@@ -121,6 +135,7 @@ void print_domains(char *dir) {
     }
 }
 
+/*  extract domains from files with custom pattern for regular expressions */
 void scan_file(char *path) {
     FILE *file = fopen(path, "r");
     if (file == NULL) {
@@ -132,10 +147,6 @@ void scan_file(char *path) {
     int reti;
     char line[MAX_LINE_LEN];
     char* pattern = "(http://|https://|www\\.)([a-zA-Z0-9-]+\\.?)+[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro|gr)|[a-zA-Z0-9-]+\\.(com|org|net|edu|gov|mil|int|info|biz|mobi|name|pro|gr)";
-
-
-
-
 
 
     reti = regcomp(&regex, pattern, REG_EXTENDED);
@@ -167,6 +178,8 @@ void scan_file(char *path) {
     fclose(file);
 }
 
+
+/* Traverse directory and do actions */
 void traverse_directory_inspect(char *dir) {
     DIR *dp;
     struct dirent *entry;
@@ -194,3 +207,4 @@ void traverse_directory_inspect(char *dir) {
     closedir(dp);
 }
 
+/*----------------------------------------------------------------------------------------------------------------*/

@@ -1,6 +1,15 @@
+
+/*****************************************************
+ * @file   slice-unlock.c                               *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for slice-unlock.c (Slice-Unlock mode) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
 #include "../include/antivirus.h"
 
-
+/* return id of current process*/
 pid_t pid_process(){
     return getpid();
 }
@@ -15,10 +24,10 @@ int evaluate_polynomial(int a2, int a1, int a0, int x) {
     return a2 * x * x + a1 * x + a0;
 }
 
-// Function to generate shares for a given secret
+/* Function to generate shares for a given secret */
 void generate_shares(int secret, int shares[MAX_MEMBERS][2]) {
     /* Generate random  a2, a1, and a0 coefficients */
-    /* You put your custom range for example (100-999)*/
+    /* custom range for example (100-999)*/
     computed_number[0] = generate_random_number(10, 99);
     computed_number[1] = generate_random_number(100, 999);
     int a0 = secret; 
@@ -54,6 +63,7 @@ int reconstruct_secret(int shares[MAX_MEMBERS][2], int provided_shares[MAX_MEMBE
     return a0;
 }
 
+/* Function to print the slice (pairs of shares) */
 void print_slice(int secret_number){
     time_t rawtime;
     struct tm *timeinfo;
@@ -74,7 +84,7 @@ void print_slice(int secret_number){
     }
 }
 
-
+/* Function to print messages in unlock mode */
 void print_unlock_provided_share(int reconstructed_number , int provided_share_number){
     time_t rawtime;
     struct tm *timeinfo;

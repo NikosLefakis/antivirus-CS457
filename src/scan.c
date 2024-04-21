@@ -1,10 +1,20 @@
+
+/*****************************************************
+ * @file   scan.c                               *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for scan.c (Scan mode) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
 #include "../include/antivirus.h"
 
 InfectedFiles infected_files[MAX_FILES];
 int num_infected_files = 0;
 int total_files_scan = 0;
 
-/*---------------------Scan mode------------------------------------------------------------------------*/
+
+/*Function to calculate the MD5 hash of a file */
 void calculate_md5(char *filename, char *md5sum) {
     if (md5sum == NULL) return;
 
@@ -34,6 +44,7 @@ void calculate_md5(char *filename, char *md5sum) {
      md5sum[MD5_DIGEST_LENGTH*2] = '\0'; 
 }
 
+/* Function to calculate the SHA256 hash of a file */
 void calculate_sha256(char *filename, char *sha256sum) {
 
     if(sha256sum == NULL) return;
@@ -66,6 +77,7 @@ void calculate_sha256(char *filename, char *sha256sum) {
 
 }
 
+/*check for sha256 , md5 , bitcoin address and virus signature*/
 void check_files_indicators(char* pathname){
     char digest_md5[MD5_DIGEST_LENGTH * 2 + 1];
     char digest_sha256[SHA256_DIGEST_LENGTH * 2 + 1];
@@ -135,6 +147,7 @@ void check_files_indicators(char* pathname){
     fclose(file);
 }
 
+/*traverse directory and do actions*/
 void scan_directories(char* dirname) {
     DIR* dir;
     struct dirent* entry;
@@ -161,6 +174,7 @@ void scan_directories(char* dirname) {
     closedir(dir);
 }
 
+/*Function to print results in scan mode*/
 void print_results(char* dir) {
     time_t rawtime;
     struct tm *timeinfo;

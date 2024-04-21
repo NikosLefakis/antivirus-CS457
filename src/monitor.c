@@ -1,4 +1,15 @@
+
+/*****************************************************
+ * @file   inspect.c                               *
+ * @author Nikos Lefakis csd4804@csd.uoc.gr    *
+ *                                                   *
+ * @brief Implementation for monitor.c (Monitor mode) 				 *
+ * Assignment 2 CS457: “Implementation of a Ransomware Protection Software Suite”					         *
+ *****************************************************/ 
+
 #include "../include/antivirus.h"
+
+
 
 char locked_filenames[MAX_EVENTS][MAX_LENGTH]; /* Global array to store the names of locked files */
 int locked_files_count = 0; /* Global variable to keep track of the number of locked files */
@@ -8,6 +19,8 @@ int normal_files_count = 0; /* Global variable to keep track of the number of no
 
 int is_ransomware[MAX_EVENTS] = {0}; /*Array to keep track of ransomware status for each file */
 
+
+/* Function to handle events from the inotify instance */
 void monitor_handle_events(int fd) {
     int len;
     char buf[BUF_LEN];
@@ -71,6 +84,7 @@ void monitor_handle_events(int fd) {
     }
 }
 
+/* Function to print results in monitor mode */
 void print_results_monitor(char* dir){
      int fd = inotify_init();
     if (fd == -1) {
